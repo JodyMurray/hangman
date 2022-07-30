@@ -7,7 +7,7 @@ def get_valid_word(words):
     while '-' in word or ' ' in word:
         word = random.choice(words)
 
-    return word
+    return word.upper()
 
 def hangman():
     word = get_valid_word(words)
@@ -29,6 +29,7 @@ def hangman():
             used_letters.add(user_letter)
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
+                print('')
 
         elif user_letter in used_letters:
             print('\nYou have already guessed that letter. Please try again.')
