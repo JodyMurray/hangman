@@ -9,6 +9,7 @@ def get_valid_word(words):
 
     return word.upper()
 
+
 def hangman():
     word = get_valid_word(words)
     word_letters = set(word)
@@ -19,10 +20,10 @@ def hangman():
     # get user input
     while len(word_letters) > 0:
         # letters used
-        print('You have used these letters: ', ' '.join(used_letters))
+        print('\nYou have used these letters: ', ' '.join(used_letters))
 
         word_list = [letter if letter in used_letters else '-' for letter in word]
-        print('Current word: ', ' '.join(word_list))
+        print('\nCurrent word: ', ' '.join(word_list))
 
         user_letter = input('Guess a letter: ').upper()
         if user_letter in alphabet - used_letters:
@@ -37,8 +38,19 @@ def hangman():
         else:
             print('\nInvalid character')
 
+
 print("\nWelcome to Hangman!")
-user_input = input('Begin game?:')
+
+while True:
+    user_input = input("\nEnter y/n to begin: ")
+    if user_input=="y":
+        hangman()
+        continue
+    elif user_input=="n":
+        break
+    else:
+        print("\nEnter either yes/no")
+
 print(user_input)
 hangman()
 
