@@ -9,12 +9,27 @@ def get_valid_word(words):
 
     return word.upper()
 
+def get_min_word_length():
+    """Get user-inputted minimum word length for the game."""
+    while True:
+        min_word_length = input(
+            'What minimum word length do you want? [4-16] ')
+        try:
+            min_word_length = int(min_word_length)
+            if 4 <= min_word_length <= 16:
+                return min_word_length
+            else:
+                print('{0} is not between 4 and 16'.format(min_word_length))
+        except ValueError:
+            print('{0} is not an integer between 4 and 16'.format(
+                min_word_length))
 
 def hangman():
     word = get_valid_word(words)
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set() # user guesses
+    min_word_length = get_min_word_length()
 
 
     # get user input
@@ -40,6 +55,7 @@ def hangman():
 
 
 print("\nWelcome to Hangman!")
+
 
 while True:
     user_input = input("\nEnter y/n to begin: ")
