@@ -11,6 +11,10 @@ def get_valid_word(words):
 
 # define game 
 def hangman():
+    """
+    Starts the game, collects user letter and shows this along with print statements 
+    showing if you guessed wrong or input an invalid letter
+    """
     word = get_valid_word(words)
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
@@ -34,8 +38,11 @@ def hangman():
                 print('')
             
             else:
-                lives = lives -1
-                print('\nWrong letter!')
+                lives = lives - 1
+                print('\nYour letter,', user_letter, 'is not in the word.')
+            if user_letter in word:
+                used_letters.update(user_letter)
+                print('\nGood guess,', user_letter, 'is in the word!')
 
         elif user_letter in used_letters:
             print('\nYou have already guessed that letter. Please try again.')
@@ -43,10 +50,11 @@ def hangman():
         else:
             print('\nInvalid character')
     
-        if lives == 0:
+    if lives == 0:
             print('Sorry, you died. The correct word was', word)
-        else:
-            print('\nYou guessed the word', word, '!! WINNER!')
+        
+    else:
+        print('\nYou guessed the word', word, '!! WINNER!')
 
 
 print("\nWelcome to Hangman!")
@@ -54,10 +62,10 @@ print("\nWelcome to Hangman!")
 # Enter game loop
 while True:
     user_input = input("\nEnter y/n to begin: ")
-    if user_input=="y":
+    if user_input == "y":
         hangman()
         continue
-    elif user_input=="n":
+    elif user_input == "n":
         break
     else:
         print("\nEnter either yes/no")
