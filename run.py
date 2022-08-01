@@ -10,7 +10,7 @@ def get_valid_word(words):
     return word.upper()
 
 # define game 
-def hangman():
+def main():
     """
     Starts the game, collects user letter and shows this along with print statements 
     showing if you guessed wrong or input an invalid letter
@@ -63,7 +63,7 @@ print("\nWelcome to Hangman!")
 while True:
     user_input = input("\nEnter y/n to begin: ")
     if user_input == "y":
-        hangman()
+        main()
         continue
     elif user_input == "n":
         break
@@ -72,5 +72,5 @@ while True:
 
 
 print(user_input)
-hangman()
+main()
 
