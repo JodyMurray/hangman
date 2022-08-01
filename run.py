@@ -101,6 +101,7 @@ def main():
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
                 print('')
+
             
             # tells user whether letter is correct or incorrect
             else:
@@ -122,9 +123,11 @@ def main():
     # tells user whether they guessed the complete word or not
     if lives == 0:
             print('Sorry, you died. The correct word was', word)
+            
         
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
+        
 
 
 print("\nWelcome to Hangman!")
@@ -139,7 +142,6 @@ while True:
         break
     else:
         print("\nEnter either yes/no")
-
 
 print(user_input)
 main()
