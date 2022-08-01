@@ -2,6 +2,50 @@ import random
 from words import words
 import string
 
+"""
+def start_menu():
+    
+    Displays the navigation to start a game,
+    view high scores or quit.
+
+    nl_1 = '\n'
+    nl_2 = '\n' * 2
+    clear_terminal()
+    print(f"{'  Main Menu  ':}")
+    print(f"{' 1: Play Game ':}")
+    print(f"{' 2: View High Scores ':")
+    print(f"{' 3: QUIT ':}")
+
+    while True:
+        player_menu_selection = input(" " * 21 +
+                                      "Please make a choice (1, 2,"
+                                      "or 3): \n" + ' ' * 39)
+        if player_menu_selection == '1':
+            main()
+            word = get_valid_word(words)
+            play(word)
+            while input(" " * 20 +
+                        "Would you like to play again? (Y/N) \n" +
+                        " " * 39).upper() == "Y":
+                word = get_valid_word(words)()
+                play(word)
+                clear_terminal()
+            menu()
+        elif player_menu_selection == '2':
+            display_highscores()
+            menu()
+        elif player_menu_selection == '3':
+            sys.exit()
+        else:
+            clear_terminal()
+            print('\n' * 3)
+            print(f"{'  Main Menu ! ':*}")
+            print(f"{' 1: Play Hangman ':}")
+            print(f"{' 2: View High Scores ':}")
+            print(f"{' 3: QUIT ':}")
+            print('{:^80}'.format("Sorry " + player_menu_selection +
+                                  " is an invalid option"))
+start_menu()"""
 
 hang_images = {
     0: """
