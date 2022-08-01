@@ -94,7 +94,6 @@ def main():
         word_list = [letter if letter in used_letters else '-' for letter in word]
         print('\nCurrent word: ', ' '.join(word_list))
 
-
         user_letter = input('Guess a letter: ').upper()
         if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
@@ -102,7 +101,6 @@ def main():
                 word_letters.remove(user_letter)
                 print('')
 
-            
             # tells user whether letter is correct or incorrect
             else:
                 lives = lives - 1
@@ -111,18 +109,22 @@ def main():
             if user_letter in word:
                 used_letters.update(user_letter)
                 print('\nGood guess,', user_letter, 'is in the word!')
+                print(hang_images[lives])
 
         # tells user if they have already guessed a letter 
         # or if they input an incorrect character
         elif user_letter in used_letters:
             print('\nYou have already guessed that letter. Please try again.')
+            print(hang_images[lives])
     
         else:
             print('\nInvalid character')
+            print(hang_images[lives])
 
     # tells user whether they guessed the complete word or not
     if lives == 0:
             print('Sorry, you died. The correct word was', word)
+            
             
         
     else:
@@ -141,7 +143,7 @@ while True:
     elif user_input == "n":
         break
     else:
-        print("\nEnter either yes/no")
+        print("\nEnter either y/n")
 
 print(user_input)
 main()
