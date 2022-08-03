@@ -1,51 +1,8 @@
 import random
+import sys
 from words import words
 import string
 
-"""
-def start_menu():
-    
-    Displays the navigation to start a game,
-    view high scores or quit.
-
-    nl_1 = '\n'
-    nl_2 = '\n' * 2
-    clear_terminal()
-    print(f"{'  Main Menu  ':}")
-    print(f"{' 1: Play Game ':}")
-    print(f"{' 2: View High Scores ':")
-    print(f"{' 3: QUIT ':}")
-
-    while True:
-        player_menu_selection = input(" " * 21 +
-                                      "Please make a choice (1, 2,"
-                                      "or 3): \n" + ' ' * 39)
-        if player_menu_selection == '1':
-            main()
-            word = get_valid_word(words)
-            play(word)
-            while input(" " * 20 +
-                        "Would you like to play again? (Y/N) \n" +
-                        " " * 39).upper() == "Y":
-                word = get_valid_word(words)()
-                play(word)
-                clear_terminal()
-            menu()
-        elif player_menu_selection == '2':
-            display_highscores()
-            menu()
-        elif player_menu_selection == '3':
-            sys.exit()
-        else:
-            clear_terminal()
-            print('\n' * 3)
-            print(f"{'  Main Menu ! ':*}")
-            print(f"{' 1: Play Hangman ':}")
-            print(f"{' 2: View High Scores ':}")
-            print(f"{' 3: QUIT ':}")
-            print('{:^80}'.format("Sorry " + player_menu_selection +
-                                  " is an invalid option"))
-start_menu()"""
 
 hang_images = {
     0: """
@@ -106,6 +63,31 @@ hang_images = {
     7: "",
 }
 
+def menu():
+
+    while True:
+        print("Welcome to HANGMAN!")
+        print("Pick 1 to play GAME.")
+        print("Pick 2 to see RULES.")
+        print("Or pick 3 to EXIT application.")
+        user_input = int(input("Please enter your choice: \n"))
+        try: 
+            if user_input == 1:
+                #Enter main gameplay
+                main()
+                continue
+            elif user_input == 2:
+                #Function to explain what hangman is
+                break
+            elif user_input == 3:
+                sys.exit()
+        except ValueError:
+            print("Invalid input. Please enter 1, 2 or 3.")
+            continue
+        else: 
+            continue
+
+
 def get_valid_word(words):
     """
     function collects random word from selection of words in words.py
@@ -116,6 +98,43 @@ def get_valid_word(words):
         word = random.choice(words)
 
     return word.upper()
+
+def level_selection_choice():
+
+    print("Please pick a difficulty mode.")
+    user_choice = int(input("Pick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n"))
+
+    if user_choice == 1:
+        level = "Easy"
+    elif user_choice == 2:
+        level = "Medium"
+    elif user_choice == 3:
+        level = "Hard"
+
+    return user_choice
+
+level = level_selection_choice()
+
+def level_selection(user_choice):
+    """
+    Defines levels with length of words
+    gives three choices of difficulty
+    """
+
+
+    if user_choice == "Easy":
+        easy = [word for word in words if len(word) <= 5]
+        print(f"{level}: Easy level")
+        return easy
+    elif user_choice == "Medium":
+        Medium = [word for word in words if len(word) < 10]
+        print(f"{level}: Medium level")
+        return Medium
+    elif user_choice == "Hard":
+        hard = [word for word in words if len(word) >= 10]
+        return hard
+    else:
+        print("Please only enter 1, 2 or 3")
 
 # define game 
 def main():
@@ -168,27 +187,11 @@ def main():
     # tells user whether they guessed the complete word or not
     if lives == 0:
             print('Sorry, you died. The correct word was', word)
-            
-            
         
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
-        
 
 
-print("\nWelcome to Hangman!")
-
-# Enter game loop
-while True:
-    user_input = input("\nEnter y/n to begin: ")
-    if user_input == "y":
-        main()
-        continue
-    elif user_input == "n":
-        break
-    else:
-        print("\nEnter either y/n")
-
-print(user_input)
-main()
+def run_game():
+    
 
