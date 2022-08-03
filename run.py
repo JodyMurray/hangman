@@ -63,7 +63,7 @@ hang_images = {
     7: "",
 }
 
-def menu():
+def main():
 
     while True:
         print("Welcome to HANGMAN!")
@@ -74,7 +74,7 @@ def menu():
         try: 
             if user_input == 1:
                 #Enter main gameplay
-                main()
+                run_game()
                 continue
             elif user_input == 2:
                 #Function to explain what hangman is
@@ -99,21 +99,22 @@ def get_valid_word(words):
 
     return word.upper()
 
+
 def level_selection_choice():
 
     print("Please pick a difficulty mode.")
     user_choice = int(input("Pick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n"))
 
     if user_choice == 1:
-        level = "Easy"
+        easy_level = "easy"
+        return easy_level
     elif user_choice == 2:
-        level = "Medium"
+        medium_level = "medium"
     elif user_choice == 3:
-        level = "Hard"
+        hard_level = "hard"
 
     return user_choice
 
-level = level_selection_choice()
 
 def level_selection(user_choice):
     """
@@ -122,22 +123,20 @@ def level_selection(user_choice):
     """
 
 
-    if user_choice == "Easy":
-        easy = [word for word in words if len(word) <= 5]
-        print(f"{level}: Easy level")
-        return easy
-    elif user_choice == "Medium":
-        Medium = [word for word in words if len(word) < 10]
-        print(f"{level}: Medium level")
-        return Medium
-    elif user_choice == "Hard":
-        hard = [word for word in words if len(word) >= 10]
-        return hard
+    if user_choice == easy_level:
+        user_choice = [word for word in words if len(word) <= 5]
+        print("Level: Easy level")
+    elif user_choice == medium_level:
+        user_choice = [word for word in words if len(word) < 10]
+        print("Level: Medium level")
+    elif user_choice == hard_level:
+        user_choice = [word for word in words if len(word) >= 10]
+        print("Level: Hard level")
     else:
         print("Please only enter 1, 2 or 3")
 
 # define game 
-def main():
+def game():
     """
     Starts the game, collects user letter and shows this along with print 
     statements showing if you guessed wrong or input an invalid letter
@@ -193,5 +192,11 @@ def main():
 
 
 def run_game():
-    
+    user_valid_words = get_valid_word
+    user_level_select = level_selection_choice()
+    user_selection = level_selection(user_level_select)
+    hangman_game = game()
 
+
+if __name__ == "__main__":
+    main()
