@@ -2,6 +2,7 @@ import random
 import sys
 from words import words
 import string
+#from rules import rules_page
 
 
 hang_images = {
@@ -63,28 +64,28 @@ hang_images = {
     7: "",
 }
 
+
 def main():
 
     while True:
-        print("Welcome to HANGMAN!")
-        print("Pick 1 to play GAME.")
-        print("Pick 2 to see RULES.")
-        print("Or pick 3 to EXIT application.")
-        user_input = int(input("Please enter your choice: \n"))
-        try: 
+        print("Welcome to HANGMAN!\n")
+        print("1: Play GAME.")
+        print("2: See RULES.")
+        print("3: EXIT application.")
+        user_input = int(input("\nPlease enter your choice: "))
+        try:
             if user_input == 1:
-                #Enter main gameplay
+                # Enter main gameplay
                 run_game()
                 continue
             elif user_input == 2:
-                #Function to explain what hangman is
                 break
             elif user_input == 3:
                 sys.exit()
         except ValueError:
-            print("Invalid input. Please enter 1, 2 or 3.")
+            print("\nInvalid input. Please enter 1, 2 or 3.")
             continue
-        else: 
+        else:
             continue
 
 
@@ -93,7 +94,7 @@ def get_valid_word(words):
     function collects random word from selection of words in words.py
     and capitalizes the letter
     """
-    word = random.choice(words) 
+    word = random.choice(words)
     while '-' in word or ' ' in word:
         word = random.choice(words)
 
@@ -101,41 +102,28 @@ def get_valid_word(words):
 
 
 def level_selection_choice():
-
-    print("Please pick a difficulty mode.")
-    user_choice = int(input("Pick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n"))
+    """
+    does something
+    """
+    print("\nPlease choose a difficulty mode: ")
+    user_choice = int(
+        input("\nPick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n \n"))
 
     if user_choice == 1:
-        easy_level = "easy"
-        return easy_level
+        easy_mode = [word for word in words if len(word) <= 5]
+        print("\nLevel: Easy level")
     elif user_choice == 2:
-        medium_level = "medium"
-    elif user_choice == 3:
-        hard_level = "hard"
-
-    return user_choice
-
-
-def level_selection(user_choice):
-    """
-    Defines levels with length of words
-    gives three choices of difficulty
-    """
-
-
-    if user_choice == easy_level:
-        user_choice = [word for word in words if len(word) <= 5]
-        print("Level: Easy level")
-    elif user_choice == medium_level:
-        user_choice = [word for word in words if len(word) < 10]
+        medium_mode = [word for word in words if len(word) < 10]
         print("Level: Medium level")
-    elif user_choice == hard_level:
-        user_choice = [word for word in words if len(word) >= 10]
+    elif user_choice == 3:
+        hard_mode = [word for word in words if len(word) >= 10]
         print("Level: Hard level")
     else:
         print("Please only enter 1, 2 or 3")
 
-# define game 
+    return user_choice
+
+
 def game():
     """
     Starts the game, collects user letter and shows this along with print 
@@ -144,19 +132,21 @@ def game():
     word = get_valid_word(words)
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
-    used_letters = set() # user guesses
+    used_letters = set()  # user guesses
 
     lives = 7
 
     # get user input
     while len(word_letters) > 0 and lives > 0:
         # letters used
-        print('\nYou have', lives, 'lives left and you have used these letters: ', ' '.join(used_letters))
+        print('\nYou have', lives,
+              'lives left and you have used these letters: ', ' '.join(used_letters))
 
-        word_list = [letter if letter in used_letters else '-' for letter in word]
+        word_list = [
+            letter if letter in used_letters else '-' for letter in word]
         print('\nCurrent word: ', ' '.join(word_list))
 
-        user_letter = input('Guess a letter: ').upper()
+        user_letter = input('\nGuess a letter: ').upper()
         if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
@@ -173,20 +163,20 @@ def game():
                 print('\nGood guess,', user_letter, 'is in the word!')
                 print(hang_images[lives])
 
-        # tells user if they have already guessed a letter 
+        # tells user if they have already guessed a letter
         # or if they input an incorrect character
         elif user_letter in used_letters:
             print('\nYou have already guessed that letter. Please try again.')
             print(hang_images[lives])
-    
+
         else:
             print('\nInvalid character')
             print(hang_images[lives])
 
     # tells user whether they guessed the complete word or not
     if lives == 0:
-            print('Sorry, you died. The correct word was', word)
-        
+        print('Sorry, you died. The correct word was', word)
+
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
 
@@ -194,7 +184,6 @@ def game():
 def run_game():
     user_valid_words = get_valid_word
     user_level_select = level_selection_choice()
-    user_selection = level_selection(user_level_select)
     hangman_game = game()
 
 
