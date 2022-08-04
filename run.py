@@ -1,8 +1,35 @@
 import random
 import sys
-from words import words
 import string
+from google.oauth2.service_account import Credentials
+import gspread
 from rules import rules_page
+from words import words
+
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SCORESHEETS = GSPREAD_CLIENT.open('high-scores').worksheet('scores')
+
+
+def display_highscores():
+    """
+    clears the terminal and displays the highscores
+    from the spreadsheet.
+    """
+
+
+def update_scores(new_score):
+    """
+    updates the highscores to the spreadsheet.
+    """
 
 
 hang_images = {
@@ -71,7 +98,8 @@ def main():
         print("Welcome to HANGMAN!\n")
         print("1: Play GAME.")
         print("2: See RULES.")
-        print("3: EXIT application.")
+        print("3: See HIGHSCORES.")
+        print("4: EXIT application.")
         user_input = int(input("\nPlease enter your choice: "))
         try:
             if user_input == 1:
@@ -81,9 +109,11 @@ def main():
             elif user_input == 2:
                 rules_page()
             elif user_input == 3:
+                print(scores)
+            elif user_input == 4:
                 sys.exit()
         except ValueError:
-            print("\nInvalid input. Please enter 1, 2 or 3.")
+            print("\nInvalid input. Please enter 1, 2, 3 or 4.")
             continue
         else:
             continue
