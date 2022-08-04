@@ -2,7 +2,7 @@ import random
 import sys
 from words import words
 import string
-#from rules import rules_page
+from rules import rules_page
 
 
 hang_images = {
@@ -79,7 +79,7 @@ def main():
                 run_game()
                 continue
             elif user_input == 2:
-                break
+                rules_page()
             elif user_input == 3:
                 sys.exit()
         except ValueError:
