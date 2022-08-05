@@ -3,7 +3,23 @@ from words import words
 import string
 import random
 from rules import rules_page
+import gspread
+from google.oauth2.service_account import Credentials
 
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('high-scores2')
+
+scores = SHEET.worksheet('scores')
+data = scores.get_all_values()
+print(data)
 
 hang_images = {
     0: """
@@ -82,6 +98,7 @@ def main():
             elif user_input == 2:
                 rules_page()
             elif user_input == 3:
+                print(data)
                 break
             elif user_input == 4:
                 sys.exit()
