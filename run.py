@@ -17,9 +17,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
 
-scores = SHEET.worksheet('scores')
-data = scores.get_all_values()
-print(data)
+# scores = SHEET.worksheet('scores')
+# data = scores.get_all_values()
+# print(data)
+def get_score_data():
+    """
+    Get score values and words
+    """
+    print("Enter your name: ")
+    score_name = input("Enter your name: ")
+    print(f"The name provided is {score_name}")
+get_score_data()
 
 hang_images = {
     0: """
