@@ -20,43 +20,11 @@ SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
 Scores = High_Scores.get_all_values()
 
-# scores = SHEET.worksheet('scores')
-#data = Scores.get_all_values()
-# print(data)
-high_scores = SHEET.worksheet('high-scores')
-scores = high_scores.get_all_records()
+
 game_results = {}
-headers = ["Name:", "Score:"]
+worksheet_to_update = scores
+worksheet_to_update.append_row(high_scores)
 
-
-def get_score_data():
-    """
-    Get score values and words
-    """
-    
-   
-
-
-
-# def update_highscores_sheet():
-
-    # def validate_data(values):
-
-    #     """
-    #     Raises error if number or symbol entered instead of letter for name
-    #     """
-
-    #     try:
-    #         if len(values) != 5:
-    #             raise ValueError(
-    #                 f"No more than 5 letters for name. You provided {len(values)}"
-    #             )
-    #     except ValueError as e:
-    #         print(f"Invalid input: {e}, please try again.\n")
-
-    #     print(values)
-
-    # get_score_data()
 
 
 hang_images = {
@@ -238,6 +206,29 @@ def game():
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
 
+def get_score_name():
+    """
+    Get name for high scores
+    """
+    while True: 
+        print("Please enter name: \n")
+        name = input("Enter your name: \n")
+        print(f"Welcome, {name}!")
+        if validate_name(name):
+                break
+    return name
+
+def validate_name():
+        try:
+            [str(name) for name in names]
+            if len(names) != 6:
+                raise ValueError(
+                f"No more than 5 letters required, you provided {len(names)}"
+            )
+            elif user_menu_choice >= 5:
+                print("Invalid input. Please try again.\n")
+        except ValueError:
+            print("Please enter a 5 or less letters.\n")
 
 def run_game():
     user_valid_words = get_valid_word
