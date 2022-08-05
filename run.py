@@ -1,33 +1,63 @@
 import sys
+import gspread
+from google.oauth2.service_account import Credentials
 from words import words
 import string
 import random
 from rules import rules_page
-import gspread
-from google.oauth2.service_account import Credentials
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
+High_Scores = SHEET.worksheet('scores')
+Scores = High_Scores.get_all_values()
 
 # scores = SHEET.worksheet('scores')
-# data = scores.get_all_values()
+#data = Scores.get_all_values()
 # print(data)
+high_scores = SHEET.worksheet('high-scores')
+scores = high_scores.get_all_records()
+game_results = {}
+headers = ["Name:", "Score:"]
+
+
 def get_score_data():
     """
     Get score values and words
     """
-    print("Enter your name: ")
-    score_name = input("Enter your name: ")
-    print(f"The name provided is {score_name}")
-get_score_data()
+    
+   
+
+
+
+# def update_highscores_sheet():
+
+    # def validate_data(values):
+
+    #     """
+    #     Raises error if number or symbol entered instead of letter for name
+    #     """
+
+    #     try:
+    #         if len(values) != 5:
+    #             raise ValueError(
+    #                 f"No more than 5 letters for name. You provided {len(values)}"
+    #             )
+    #     except ValueError as e:
+    #         print(f"Invalid input: {e}, please try again.\n")
+
+    #     print(values)
+
+    # get_score_data()
+
 
 hang_images = {
     0: """
@@ -106,7 +136,7 @@ def main():
             elif user_input == 2:
                 rules_page()
             elif user_input == 3:
-                print(data)
+                print(scores)
                 break
             elif user_input == 4:
                 sys.exit()
