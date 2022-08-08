@@ -17,9 +17,8 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
-Scores = SHEET.worksheet('scores')
-# update_worksheet(get_score_name, "scores")
-
+High_Scores = SHEET.worksheet('scores')
+Scores = High_Scores.get_all_values()
 
 def update_worksheet(Scores, worksheet):
     """
@@ -30,14 +29,15 @@ def update_worksheet(Scores, worksheet):
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(Scores)
     print(f"{worksheet} worksheet updated successfully\n")
-    score_data = get_score_name()
+    score_data = score_name()
     update_worksheet(score_data, "scores")
+
 
 
 hang_images = {
     0: """
             ___________
-            | /        | 
+            | /        |
             |/        ( )
             |          |
             |         / \\
@@ -95,9 +95,6 @@ hang_images = {
 
 
 def main():
-
-    # update_worksheet(Scores, SHEET)
-    # update_worksheet(get_score_name, "scores")
 
     while True:
         print("Welcome to HANGMAN!\n")
@@ -169,7 +166,6 @@ def game():
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
-    score_name = get_score_name()
 
     lives = 7
 
@@ -222,14 +218,19 @@ def get_score_name():
     """
     Get name for high scores
     """
-    while True:
+    while True: 
         print("Please enter name: \n")
-        score_name = input("Enter your name: \n")
-        print(f"Welcome, {score_name}!")
-        if get_score_name():
-            break
-    return score_name
+        user = input("Enter your name: \n")
+        print(f"Welcome, {user}!")
+        if validate_name(user):
+                break
+    return user
+        
+    worksheet_to_update = Scores
+    worksheet_to_update.append_row(Scores)
 
+    return user
+    
 
 # def get_last_5_entries_scores(score_data):
 #     """
@@ -244,30 +245,35 @@ def get_score_name():
 #         columns.append(column[-5:])
 #     return columns
 
-# def validate_data(values):
-#     """
-#     Inside the try, converts all string values into integers.
-#     Raises ValueError if strings cannot be converted into int,
-#     or if there aren't exactly 6 values.
-#     """
-#     try:
-#         [str(value) for value in values]
-#         if len(values) != 6:
-#             raise ValueError(
-#                 f"Exactly 6 values required, you provided {len(values)}"
-#             )
-#     except ValueError as e:
-#         print(f"Invalid data: {e}, please try again.\n")
-#         return False
+def validate_data(values):
+    """
+    Inside the try, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        [str(value) for value in values]
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
 
-#     return True
+    return True
 
 
 def run_game():
+
+    """
+    Order of game functions
+    """
+
     user_valid_words = get_valid_word
-    user_level_select = level_selection_choice(user_choice)
+    user_choice = level_selection_choice()
     hangman_game = game()
-    scores = SHEET.worksheet("scores")
+    get_score_name()
 
 
 if __name__ == "__main__":
