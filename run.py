@@ -18,12 +18,11 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
-Scores = High_Scores.get_all_values()
+scores = High_Scores.get_all_values()
 
 
 game_results = {}
-worksheet_to_update = scores
-worksheet_to_update.append_row(high_scores)
+
 
 
 
@@ -159,6 +158,9 @@ def game():
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
+    scores_columns = get_last_5_entries_scores()
+    update_worksheet(High_Scores, "scores")
+
 
     lives = 7
 
@@ -212,28 +214,59 @@ def get_score_name():
     """
     while True: 
         print("Please enter name: \n")
-        name = input("Enter your name: \n")
-        print(f"Welcome, {name}!")
-        if validate_name(name):
+        add_name = input("Enter your name: \n")
+        print(f"Welcome, {add_name}!")
+        if validate_name(add_name):
                 break
-    return name
+    return add_name
 
-def validate_name():
-        try:
-            [str(name) for name in names]
-            if len(names) != 6:
-                raise ValueError(
-                f"No more than 5 letters required, you provided {len(names)}"
+def update_worksheet(scores, worksheet):
+    """
+    Receives a list of integers to be insterted into a worksheet
+    Update the relevant worksheet with the data provided. 
+    """
+    print(f"Updating {worksheet} scores worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(scores)
+    print(f"{worksheet} worksheet updated successfully\n")
+
+def get_last_5_entries_scores():
+    """
+    Collects collums of data from sales worksheet, collecting 
+    the last 5 entries from each sandwich and returns the data 
+    as a list of lists.
+    """
+    scores = SHEET.worksheet("scores")
+
+    columns = []
+    for ind in range(1, 7):
+        column = scores.col_values(ind)
+        columns.append(column[-5:])
+    return columns
+
+def validate_data(values):
+    """
+    Inside the try, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        [str(value) for value in values]
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
             )
-            elif user_menu_choice >= 5:
-                print("Invalid input. Please try again.\n")
-        except ValueError:
-            print("Please enter a 5 or less letters.\n")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
 
 def run_game():
     user_valid_words = get_valid_word
     user_level_select = level_selection_choice()
     hangman_game = game()
+
 
 
 if __name__ == "__main__":
