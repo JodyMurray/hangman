@@ -29,9 +29,8 @@ def update_worksheet(Scores, worksheet):
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(Scores)
     print(f"{worksheet} worksheet updated successfully\n")
-    score_data = score_name()
+    score_data = get_score_name()
     update_worksheet(score_data, "scores")
-
 
 
 hang_images = {
@@ -222,36 +221,23 @@ def get_score_name():
         print("Please enter name: \n")
         user = input("Enter your name: \n")
         print(f"Welcome, {user}!")
-        if validate_name(user):
-                break
-    return user
-        
+        if validate_name():
+            break        
     worksheet_to_update = Scores
     worksheet_to_update.append_row(Scores)
 
     return user
-    
 
-# def get_last_5_entries_scores(score_data):
-#     """
-#     Collects colums of data from sales worksheet, collecting 
-#     the last 5 entries from each sandwich and returns the data 
-#     as a list of lists.
-#     """
-#     scores = SHEET.worksheet("scores")
 
-#     for ind in range(1, 7):
-#         column = scores.col_values(ind)
-#         columns.append(column[-5:])
-#     return columns
-
-def validate_data(values):
+def validate_name():
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
     """
+    values = get_score_name
     try:
+        input("Enter your name: ")
         [str(value) for value in values]
         if len(values) != 6:
             raise ValueError(
@@ -270,10 +256,11 @@ def run_game():
     Order of game functions
     """
 
-    user_valid_words = get_valid_word
+    user_valid_words = get_valid_word()
     user_choice = level_selection_choice()
     hangman_game = game()
-    get_score_name()
+    get_name = get_score_name()
+    score_data = validate_name()
 
 
 if __name__ == "__main__":
