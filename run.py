@@ -17,13 +17,19 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
-High_Scores = SHEET.worksheet('scores')
-scores = High_Scores.get_all_values()
+scores = SHEET.worksheet('scores')
 
 
-game_results = {}
 
-
+def update_worksheet(scores, worksheet):
+    """
+    Receives a list of integers to be insterted into a worksheet
+    Update the relevant worksheet with the data provided. 
+    """
+    print(f"Updating {worksheet} scores worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(scores)
+    print(f"{worksheet} worksheet updated successfully\n")
 
 
 hang_images = {
@@ -114,6 +120,7 @@ def main():
             continue
 
 
+
 def get_valid_word(word):
     """
     function collects random word from selection of words in words.py
@@ -158,8 +165,7 @@ def game():
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
-    scores_columns = get_last_5_entries_scores()
-    update_worksheet(High_Scores, "scores")
+
 
 
     lives = 7
@@ -214,25 +220,16 @@ def get_score_name():
     """
     while True: 
         print("Please enter name: \n")
-        add_name = input("Enter your name: \n")
-        print(f"Welcome, {add_name}!")
-        if validate_name(add_name):
-                break
-    return add_name
+        score_name = input("Enter your name: \n")
+        print(f"Welcome, {score_name}!")
+        if get_score_name():
+            break
+    return score_name
 
-def update_worksheet(scores, worksheet):
-    """
-    Receives a list of integers to be insterted into a worksheet
-    Update the relevant worksheet with the data provided. 
-    """
-    print(f"Updating {worksheet} scores worksheet...\n")
-    worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(scores)
-    print(f"{worksheet} worksheet updated successfully\n")
 
 def get_last_5_entries_scores():
     """
-    Collects collums of data from sales worksheet, collecting 
+    Collects colums of data from sales worksheet, collecting 
     the last 5 entries from each sandwich and returns the data 
     as a list of lists.
     """
@@ -266,7 +263,7 @@ def run_game():
     user_valid_words = get_valid_word
     user_level_select = level_selection_choice()
     hangman_game = game()
-
+    update_worksheet(scores, "scores")
 
 
 if __name__ == "__main__":
