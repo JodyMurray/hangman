@@ -17,19 +17,21 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
-scores = SHEET.worksheet('scores')
+Scores = SHEET.worksheet('scores')
+# update_worksheet(get_score_name, "scores")
 
 
-
-def update_worksheet(scores, worksheet):
+def update_worksheet(Scores, worksheet):
     """
     Receives a list of integers to be insterted into a worksheet
     Update the relevant worksheet with the data provided. 
     """
     print(f"Updating {worksheet} scores worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(scores)
+    worksheet_to_update.append_row(Scores)
     print(f"{worksheet} worksheet updated successfully\n")
+    score_data = get_score_name()
+    update_worksheet(score_data, "scores")
 
 
 hang_images = {
@@ -94,6 +96,9 @@ hang_images = {
 
 def main():
 
+    # update_worksheet(Scores, SHEET)
+    # update_worksheet(get_score_name, "scores")
+
     while True:
         print("Welcome to HANGMAN!\n")
         print("1: Play GAME.")
@@ -109,7 +114,7 @@ def main():
             elif user_input == 2:
                 rules_page()
             elif user_input == 3:
-                print(scores)
+                print(Scores)
                 break
             elif user_input == 4:
                 sys.exit()
@@ -118,7 +123,6 @@ def main():
             continue
         else:
             continue
-
 
 
 def get_valid_word(word):
@@ -165,8 +169,7 @@ def game():
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
-
-
+    score_name = get_score_name()
 
     lives = 7
 
@@ -214,11 +217,12 @@ def game():
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
 
+
 def get_score_name():
     """
     Get name for high scores
     """
-    while True: 
+    while True:
         print("Please enter name: \n")
         score_name = input("Enter your name: \n")
         print(f"Welcome, {score_name}!")
@@ -227,43 +231,43 @@ def get_score_name():
     return score_name
 
 
-def get_last_5_entries_scores():
-    """
-    Collects colums of data from sales worksheet, collecting 
-    the last 5 entries from each sandwich and returns the data 
-    as a list of lists.
-    """
-    scores = SHEET.worksheet("scores")
+# def get_last_5_entries_scores(score_data):
+#     """
+#     Collects colums of data from sales worksheet, collecting 
+#     the last 5 entries from each sandwich and returns the data 
+#     as a list of lists.
+#     """
+#     scores = SHEET.worksheet("scores")
 
-    columns = []
-    for ind in range(1, 7):
-        column = scores.col_values(ind)
-        columns.append(column[-5:])
-    return columns
+#     for ind in range(1, 7):
+#         column = scores.col_values(ind)
+#         columns.append(column[-5:])
+#     return columns
 
-def validate_data(values):
-    """
-    Inside the try, converts all string values into integers.
-    Raises ValueError if strings cannot be converted into int,
-    or if there aren't exactly 6 values.
-    """
-    try:
-        [str(value) for value in values]
-        if len(values) != 6:
-            raise ValueError(
-                f"Exactly 6 values required, you provided {len(values)}"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
+# def validate_data(values):
+#     """
+#     Inside the try, converts all string values into integers.
+#     Raises ValueError if strings cannot be converted into int,
+#     or if there aren't exactly 6 values.
+#     """
+#     try:
+#         [str(value) for value in values]
+#         if len(values) != 6:
+#             raise ValueError(
+#                 f"Exactly 6 values required, you provided {len(values)}"
+#             )
+#     except ValueError as e:
+#         print(f"Invalid data: {e}, please try again.\n")
+#         return False
 
-    return True
+#     return True
+
 
 def run_game():
     user_valid_words = get_valid_word
-    user_level_select = level_selection_choice()
+    user_level_select = level_selection_choice(user_choice)
     hangman_game = game()
-    update_worksheet(scores, "scores")
+    scores = SHEET.worksheet("scores")
 
 
 if __name__ == "__main__":
