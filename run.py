@@ -220,13 +220,17 @@ def get_score_name():
     Get name for high scores
     """
     while True: 
+
         print("Please enter name: \n")
         print("Example: Yoda Murray. \n")
+
         user = input("Enter your name: \n")
+
         if validate_name(user):
-            break        
-    worksheet_to_update = Scores
-    worksheet_to_update.append_row(Scores)
+            break
+
+    # worksheet_to_update = Scores
+    # worksheet_to_update.append_row(Scores)
 
     return user
 
@@ -274,7 +278,7 @@ def run_game():
     level_mode = level_selection_choice()
     hangman_game = game()
     get_name = get_score_name()
-    score_data = validate_name()
+    # score_data = validate_name()
 
 
 if __name__ == "__main__":
