@@ -21,6 +21,7 @@ SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
 Scores = High_Scores.get_all_values()
 
+
 def update_worksheet(Scores, worksheet):
     """
     Receives a list of integers to be insterted into a worksheet
@@ -95,7 +96,9 @@ hang_images = {
 
 
 def main():
-
+    """
+    Game structure with menu selection and validator.
+    """
     while True:
         print("Welcome to HANGMAN! \n")
         print("1: Play GAME. \n")
@@ -110,6 +113,7 @@ def main():
                 continue
             elif user_input == 2:
                 rules_page()
+                continue
             elif user_input == 3:
                 print(Scores)
                 break
@@ -122,7 +126,7 @@ def main():
             continue
 
 
-def get_valid_word(words):
+def get_valid_word():
     """
     function collects random word from selection of words in words.py
     and capitalizes the letter
@@ -134,28 +138,48 @@ def get_valid_word(words):
     return word.upper()
 
 
-def level_selection_choice():
-    """
-    Selects a level difficulty mode for the game, based on user input
-    """
-    
-    print("Please choose a difficulty mode: \n")
-    user_choice = int(
-        input("Pick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n"))
+# def level_selection_choice(min_word_length):
+#     """
+#     somthing
+#     """
+#     while True:
+#         level_choice = int(input(
+#             '\nPick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n \n"))'))
+#         print('\nPlease choose a difficulty mode: ')
+#         try:
+#             level_choice = int(min_word_length)
+#             if level_choice == 1:
+#                 min_word_length = [len(word) <= 5]
+#             print("Easy Level")
+#             return level_choice
+#             continue
+#             elif level_choice == 2:
+#                 min_word_length = [len(word) < 10]
+#                 return level_choice
+#             elif level_choice == 3:
+#                 min_word_length = [len(word) >= 10]
+#                 break
+#                 return level_choice
+#             else:
+#                 print("Please only enter 1, 2 or 3")
+#             return level_choice
 
-    if user_choice == 1:
-        easy_mode = [word for word in words if len(word) <= 5]
-        print("Level: Easy level \n")
-    elif user_choice == 2:
-        medium_mode = [word for word in words if len(word) < 10]
-        print("Level: Medium level \n")
-    elif user_choice == 3:
-        hard_mode = [word for word in words if len(word) >= 10]
-        print("Level: Hard level \n")
-    else:
-        print("Please only enter 1, 2 or 3")
-
-    return user_choice
+def get_min_word_length():
+    """
+    Choose length of word
+    """
+    while True:
+        min_word_length = input(
+            'What minimum word length do you want? [4-16] ')
+        try:
+            min_word_length = int(min_word_length)
+            if 4 <= min_word_length <= 16:
+                return min_word_length
+            else:
+                print('{0} is not between 4 and 16'.format(min_word_length))
+        except ValueError:
+            print('{0} is not an integer between 4 and 16'.format(
+                min_word_length))
 
 
 def game():
@@ -163,10 +187,11 @@ def game():
     Starts the game, collects user letter and shows this along with print 
     statements showing if you guessed wrong or input an invalid letter
     """
-    word = get_valid_word(words)
+    word = get_valid_word()
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
+    min_word_length = get_min_word_length()
 
     lives = 7
 
@@ -213,13 +238,14 @@ def game():
 
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
+        return True
 
 
 def get_score_name():
     """
     Get name for high scores
     """
-    while True: 
+    while True:
 
         print("Please enter name: \n")
         print("Example: Yoda Murray. \n")
@@ -266,7 +292,7 @@ def validate_name(user):
     else:
         print("Invalid. Please enter a valid name.")
         return False
-        
+
 
 def update_high_score_sheet():
     """
@@ -281,16 +307,15 @@ def update_high_score_sheet():
 
 
 def run_game():
-
     """
     Order of game functions
     """
 
-    user_valid_words = get_valid_word(words)
-    level_mode = level_selection_choice()
+    user_valid_words = get_valid_word()
+    level_choice = level_selection_choice()
     hangman_game = game()
+
     get_name = get_score_name()
-    # score_data = validate_name()
 
 
 if __name__ == "__main__":
