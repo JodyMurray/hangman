@@ -1,5 +1,6 @@
 import sys
 import gspread
+import re
 from google.oauth2.service_account import Credentials
 from words import words
 import string
@@ -96,12 +97,12 @@ hang_images = {
 def main():
 
     while True:
-        print("Welcome to HANGMAN!\n")
-        print("1: Play GAME.")
-        print("2: See RULES.")
-        print("3: See HIGHSCORES.")
-        print("4: EXIT application.")
-        user_input = int(input("\nPlease enter your choice: "))
+        print("Welcome to HANGMAN! \n")
+        print("1: Play GAME. \n")
+        print("2: See RULES. \n")
+        print("3: See HIGHSCORES. \n")
+        print("4: EXIT application. \n")
+        user_input = int(input("Please enter your choice: \n"))
         try:
             if user_input == 1:
                 # Enter main gameplay
@@ -115,13 +116,13 @@ def main():
             elif user_input == 4:
                 sys.exit()
         except ValueError:
-            print("\nInvalid input. Please enter 1, 2, 3 or 4.")
+            print("Invalid input. Please enter 1, 2, 3 or 4. \n")
             continue
         else:
             continue
 
 
-def get_valid_word(word):
+def get_valid_word(words):
     """
     function collects random word from selection of words in words.py
     and capitalizes the letter
@@ -135,21 +136,22 @@ def get_valid_word(word):
 
 def level_selection_choice():
     """
-    does something
+    Selects a level difficulty mode for the game, based on user input
     """
-    print("\nPlease choose a difficulty mode: ")
+    
+    print("Please choose a difficulty mode: \n")
     user_choice = int(
-        input("\nPick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n \n"))
+        input("Pick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n"))
 
     if user_choice == 1:
         easy_mode = [word for word in words if len(word) <= 5]
-        print("\nLevel: Easy level")
+        print("Level: Easy level \n")
     elif user_choice == 2:
         medium_mode = [word for word in words if len(word) < 10]
-        print("Level: Medium level")
+        print("Level: Medium level \n")
     elif user_choice == 3:
         hard_mode = [word for word in words if len(word) >= 10]
-        print("Level: Hard level")
+        print("Level: Hard level \n")
     else:
         print("Please only enter 1, 2 or 3")
 
@@ -219,9 +221,9 @@ def get_score_name():
     """
     while True: 
         print("Please enter name: \n")
+        print("Example: Yoda Murray. \n")
         user = input("Enter your name: \n")
-        print(f"Welcome, {user}!")
-        if validate_name():
+        if validate_name(user):
             break        
     worksheet_to_update = Scores
     worksheet_to_update.append_row(Scores)
@@ -229,25 +231,37 @@ def get_score_name():
     return user
 
 
-def validate_name():
+def validate_name(user):
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
     """
-    values = get_score_name
-    try:
-        input("Enter your name: ")
-        [str(value) for value in values]
-        if len(values) != 6:
-            raise ValueError(
-                f"Exactly 6 values required, you provided {len(values)}"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
 
-    return True
+    values = get_score_name
+
+    # try:
+    #     [str(value) for value in values]
+    #     if len(values) != 6:
+    #         raise ValueError(
+    #             f"Exactly 6 values required, you provided {len(values)}"
+    #         )
+    # except ValueError as e:
+    #     print(f"Invalid data: {e}, please try again.\n")
+    #     return False
+
+    # return True
+
+    regex_name = re.compile(r'^([a-z]+)( [a-z]+)*( [a-z]+)*$', re.IGNORECASE)
+
+    res = regex_name.search(user)
+
+    if res:
+        print(f"Welcome, {user}!")
+        return True
+    else:
+        print("Invalid. Please enter a valid name.")
+        return False
 
 
 def run_game():
@@ -256,8 +270,8 @@ def run_game():
     Order of game functions
     """
 
-    user_valid_words = get_valid_word()
-    user_choice = level_selection_choice()
+    user_valid_words = get_valid_word(words)
+    level_mode = level_selection_choice()
     hangman_game = game()
     get_name = get_score_name()
     score_data = validate_name()
