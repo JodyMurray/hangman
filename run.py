@@ -242,7 +242,7 @@ def validate_name(user):
     or if there aren't exactly 6 values.
     """
 
-    values = get_score_name
+    # values = get_score_name
 
     # try:
     #     [str(value) for value in values]
@@ -266,6 +266,18 @@ def validate_name(user):
     else:
         print("Invalid. Please enter a valid name.")
         return False
+        
+
+def update_high_score_sheet():
+    """
+    In this function, create a list with the score and full name after validation,
+    then add it to the google sheets using "googlesheets.append_row(list)".
+    First ensure full functionality of program:
+    Level selection still isn´t working well. Once fixed, move onto google sheets.
+    """
+
+    # Add list to show to user: score and full name
+    # googlesheets.append_row(list) to add row to google sheets
 
 
 def run_game():
