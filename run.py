@@ -1,10 +1,10 @@
 import sys
-import gspread
-import re
-from google.oauth2.service_account import Credentials
-from words import words
 import string
 import random
+import re
+import gspread
+from google.oauth2.service_account import Credentials
+from words import words
 from rules import rules_page
 
 
@@ -19,13 +19,13 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
-Scores = High_Scores.get_all_values()
+# Scores = High_Scores.get_all_values()
 
 
 def update_worksheet(Scores, worksheet):
     """
     Receives a list of integers to be insterted into a worksheet
-    Update the relevant worksheet with the data provided. 
+    Update the relevant worksheet with the data provided.
     """
     print(f"Updating {worksheet} scores worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -46,42 +46,42 @@ hang_images = {
         """,
     1: """
             ___________
-            | /        | 
+            | /        |
             |/        ( )
             |          |
-            |         / 
+            |         /
             |
         """,
     2: """
             ___________
-            | /        | 
+            | /        |
             |/        ( )
             |          |
-            |          
+            |
             |
         """,
     3: """
             ___________
-            | /        | 
+            | /        |
             |/        ( )
-            |          
-            |          
+            |
+            |
             |
         """,
     4: """
             ___________
-            | /        | 
-            |/        
-            |          
-            |          
+            | /        |
+            |/
+            |
+            |
             |
         """,
     5: """
             ___________
-            | /        
-            |/        
-            |          
-            |          
+            | /
+            |/
+            |
+            |
             |
         """,
     6: """
@@ -105,12 +105,13 @@ def main():
         print("2: See RULES. \n")
         print("3: See HIGHSCORES. \n")
         print("4: EXIT application. \n")
-        user_input = int(input("Please enter your choice: \n"))
+        user_input = int(input("Please enter your choice: \n\n"))
         try:
             if user_input == 1:
+                print("\n\nEntering Game!\n")
                 # Enter main gameplay
                 run_game()
-                continue
+                sys.exit()
             elif user_input == 2:
                 rules_page()
                 continue
@@ -126,72 +127,16 @@ def main():
             continue
 
 
-def get_valid_word():
-    """
-    function collects random word from selection of words in words.py
-    and capitalizes the letter
-    """
-    word = random.choice(words)
-    while '-' in word or ' ' in word:
-        word = random.choice(words)
-
-    return word.upper()
-
-
-# def level_selection_choice(min_word_length):
-#     """
-#     somthing
-#     """
-#     while True:
-#         level_choice = int(input(
-#             '\nPick a level:\n 1.Easy\n 2.Medium\n 3.Hard\n \n"))'))
-#         print('\nPlease choose a difficulty mode: ')
-#         try:
-#             level_choice = int(min_word_length)
-#             if level_choice == 1:
-#                 min_word_length = [len(word) <= 5]
-#             print("Easy Level")
-#             return level_choice
-#             continue
-#             elif level_choice == 2:
-#                 min_word_length = [len(word) < 10]
-#                 return level_choice
-#             elif level_choice == 3:
-#                 min_word_length = [len(word) >= 10]
-#                 break
-#                 return level_choice
-#             else:
-#                 print("Please only enter 1, 2 or 3")
-#             return level_choice
-
-def get_min_word_length():
-    """
-    Choose length of word
-    """
-    while True:
-        min_word_length = input(
-            'What minimum word length do you want? [4-16] ')
-        try:
-            min_word_length = int(min_word_length)
-            if 4 <= min_word_length <= 16:
-                return min_word_length
-            else:
-                print('{0} is not between 4 and 16'.format(min_word_length))
-        except ValueError:
-            print('{0} is not an integer between 4 and 16'.format(
-                min_word_length))
-
-
 def game():
     """
     Starts the game, collects user letter and shows this along with print 
     statements showing if you guessed wrong or input an invalid letter
     """
+    user = get_score_name()
     word = get_valid_word()
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
-    min_word_length = get_min_word_length()
 
     lives = 7
 
@@ -241,6 +186,17 @@ def game():
         return True
 
 
+def get_valid_word():
+    """
+    function collects random word from selection of words in words.py
+    and capitalizes the letter
+    """
+    word = random.choice(words)
+    while '-' in word or ' ' in word:
+        word = random.choice(words)
+    return word.upper()
+
+
 def get_score_name():
     """
     Get name for high scores
@@ -250,18 +206,18 @@ def get_score_name():
         print("Please enter name: \n")
         print("Example: Yoda Murray. \n")
 
-        user = input("Enter your name: \n")
+        user_name = input("Enter your name: \n\n")
 
-        if validate_name(user):
+        if validate_name(user_name):
             break
 
     # worksheet_to_update = Scores
     # worksheet_to_update.append_row(Scores)
 
-    return user
+    return user_name
 
 
-def validate_name(user):
+def validate_name(user_name):
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
@@ -284,17 +240,17 @@ def validate_name(user):
 
     regex_name = re.compile(r'^([a-z]+)( [a-z]+)*( [a-z]+)*$', re.IGNORECASE)
 
-    res = regex_name.search(user)
+    res = regex_name.search(user_name)
 
     if res:
-        print(f"Welcome, {user}!")
+        print(f"Welcome, {user_name}!")
         return True
     else:
         print("Invalid. Please enter a valid name.")
         return False
 
 
-def update_high_score_sheet():
+def update_high_score_sheet(get_names):
     """
     In this function, create a list with the score and full name after validation,
     then add it to the google sheets using "googlesheets.append_row(list)".
@@ -302,8 +258,17 @@ def update_high_score_sheet():
     Level selection still isn´t working well. Once fixed, move onto google sheets.
     """
 
-    # Add list to show to user: score and full name
-    # googlesheets.append_row(list) to add row to google sheets
+    player_info_list = [get_names]
+
+    screen_info = f"""
+    You name is {get_names}
+    """
+
+    print(screen_info)
+
+    print("Application is now closing.")
+
+    High_Scores.append_row(player_info_list)
 
 
 def run_game():
@@ -312,10 +277,9 @@ def run_game():
     """
 
     user_valid_words = get_valid_word()
-    level_choice = level_selection_choice()
     hangman_game = game()
-
     get_name = get_score_name()
+    worksheet_update = update_high_score_sheet(get_name)
 
 
 if __name__ == "__main__":
