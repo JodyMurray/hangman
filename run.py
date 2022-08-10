@@ -19,17 +19,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
-# Scores = High_Scores.get_all_values()
+Scores = High_Scores.get_all_values()
 
 
-def update_worksheet(Scores, worksheet):
+def update_worksheet(High_Scores, worksheet):
     """
     Receives a list of integers to be insterted into a worksheet
     Update the relevant worksheet with the data provided.
     """
     print(f"Updating {worksheet} scores worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(Scores)
+    worksheet_to_update.append_row(High_Scores)
     print(f"{worksheet} worksheet updated successfully\n")
     score_data = get_score_name()
     update_worksheet(score_data, "scores")
@@ -126,6 +126,36 @@ def main():
         else:
             continue
 
+# def get_min_word_length():
+#     """Get user-inputted minimum word length for the game."""
+#     while True:
+#         min_word_length = input(
+#             'What minimum word length do you want? [4-16] ')
+#         try:
+#             min_word_length = int(min_word_length)
+#             if 4 <= min_word_length <= 16:
+#                 return min_word_length
+#             else:
+#                 print('{0} is not between 4 and 16'.format(min_word_length))
+#         except ValueError:
+#             print('{0} is not an integer between 4 and 16'.format(
+#                 min_word_length))
+
+# def get_valid_word(min_word_length):
+#     """Get a random word from the wordlist using no extra memory."""
+#     num_words_processed = 0
+#     curr_word = None
+#     with open (words, 'r') as f:
+#         for word in f:
+#             if '(' in word or ')' in word:
+#                 continue
+#             word = word.strip().lower()
+#             if len(word) < min_word_length:
+#                 continue
+#             num_words_processed += 1
+#             if random.randint(1, num_words_processed) == 1:
+#                 curr_word = word
+#     return curr_word
 
 def game():
     """
@@ -133,11 +163,12 @@ def game():
     statements showing if you guessed wrong or input an invalid letter
     """
     user = get_score_name()
+    worksheet_update = update_high_score_sheet(get_names)
     word = get_valid_word()
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
-
+    
     lives = 7
 
     # get user input
@@ -186,37 +217,6 @@ def game():
         return True
 
 
-def get_valid_word():
-    """
-    function collects random word from selection of words in words.py
-    and capitalizes the letter
-    """
-    word = random.choice(words)
-    while '-' in word or ' ' in word:
-        word = random.choice(words)
-    return word.upper()
-
-
-def get_score_name():
-    """
-    Get name for high scores
-    """
-    while True:
-
-        print("Please enter name: \n")
-        print("Example: Yoda Murray. \n")
-
-        user_name = input("Enter your name: \n\n")
-
-        if validate_name(user_name):
-            break
-
-    # worksheet_to_update = Scores
-    # worksheet_to_update.append_row(Scores)
-
-    return user_name
-
-
 def validate_name(user_name):
     """
     Inside the try, converts all string values into integers.
@@ -224,26 +224,12 @@ def validate_name(user_name):
     or if there aren't exactly 6 values.
     """
 
-    # values = get_score_name
-
-    # try:
-    #     [str(value) for value in values]
-    #     if len(values) != 6:
-    #         raise ValueError(
-    #             f"Exactly 6 values required, you provided {len(values)}"
-    #         )
-    # except ValueError as e:
-    #     print(f"Invalid data: {e}, please try again.\n")
-    #     return False
-
-    # return True
-
     regex_name = re.compile(r'^([a-z]+)( [a-z]+)*( [a-z]+)*$', re.IGNORECASE)
 
     res = regex_name.search(user_name)
 
     if res:
-        print(f"Welcome, {user_name}!")
+        print(f"\nWelcome, {user_name}!")
         return True
     else:
         print("Invalid. Please enter a valid name.")
@@ -261,25 +247,53 @@ def update_high_score_sheet(get_names):
     player_info_list = [get_names]
 
     screen_info = f"""
-    You name is {get_names}
+    The Username you entered is {get_names}
     """
 
     print(screen_info)
 
-    print("Application is now closing.")
-
     High_Scores.append_row(player_info_list)
+    
+    return player_info_list
+
+def get_valid_word():
+    """
+    function collects random word from selection of words in words.py
+    and capitalizes the letter
+    """
+    word = random.choice(words)
+    while '-' in word or ' ' in word:
+        word = random.choice(words)
+    return word.upper()
+
+def get_score_name():
+    """
+    Get name for high scores
+    """
+    
+    while True:
+
+        print("Please enter name: \n")
+        print("Example: Todd. \n")
+
+        user_name = input("Enter your name: \n\n")
+
+        if validate_name(user_name):
+            break
+
+    return user_name
 
 
 def run_game():
     """
     Order of game functions
     """
-
     user_valid_words = get_valid_word()
     hangman_game = game()
-    get_name = get_score_name()
-    worksheet_update = update_high_score_sheet(get_name)
+    print(Scores)
+    print("Application is now closing.")
+    
+
 
 
 if __name__ == "__main__":
