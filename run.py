@@ -21,7 +21,6 @@ SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
 Scores = High_Scores.get_all_values()
 
-
 def update_worksheet(High_Scores, worksheet):
     """
     Receives a list of integers to be insterted into a worksheet
@@ -117,6 +116,10 @@ def main():
                 continue
             elif user_input == 3:
                 print(Scores)
+                print("-" * 80)
+                print('\n')
+                input(" " * 24 + "Press Enter to return to the menu \n" + ' ' * 50)
+                SystemExit()
                 break
             elif user_input == 4:
                 sys.exit()
@@ -126,33 +129,17 @@ def main():
         else:
             continue
 
-# def get_min_word_length():
-#     """Get user-inputted minimum word length for the game."""
-#     while True:
-#         min_word_length = input(
-#             'What minimum word length do you want? [4-16] ')
-#         try:
-#             min_word_length = int(min_word_length)
-#             if 4 <= min_word_length <= 16:
-#                 return min_word_length
-#             else:
-#                 print('{0} is not between 4 and 16'.format(min_word_length))
-#         except ValueError:
-#             print('{0} is not an integer between 4 and 16'.format(
-#                 min_word_length))
-
-
 def game():
     """
     Starts the game, collects user letter and shows this along with print 
     statements showing if you guessed wrong or input an invalid letter
     """
-    # score_data = get_score_name()
     get_name = get_score_name()
     worksheet_update = update_high_score_sheet(get_name)
     word = get_valid_word()
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
+    Scores = re.sub(r"[\([{})\]]", "", Scores)
     used_letters = set()  # user guesses
 
     lives = 7
@@ -185,11 +172,10 @@ def game():
                 print(hang_images[lives])
 
         # tells user if they have already guessed a letter
-        # or if they input an incorrect character
         elif user_letter in used_letters:
             print('\nYou have already guessed that letter. Please try again.')
             print(hang_images[lives])
-
+        # or if they input an incorrect character
         else:
             print('\nInvalid character')
             print(hang_images[lives])
@@ -236,13 +222,13 @@ def get_valid_word():
 
 def get_score_name():
     """
-    Get name for high scores
+    Get name for high scores entries
     """
 
     while True:
 
         print("Please enter name: \n")
-        print("Example: Todd. \n")
+        print("Example: Yoda. \n")
 
         user_name = input("Enter your name: \n\n")
 
@@ -254,8 +240,7 @@ def get_score_name():
 
 def update_high_score_sheet(get_names):
     """
-    First ensure full functionality of program:
-    Level selection still isn´t working well. Once fixed, move onto google sheets.
+    Get name and update to high scores
     """
 
     player_info_list = [get_names]
@@ -277,7 +262,6 @@ def run_game():
     """
     user_valid_words = get_valid_word()
     hangman_game = game()
-    # print(Scores.append)
 
 
 if __name__ == "__main__":
