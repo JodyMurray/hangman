@@ -154,7 +154,7 @@ def game():
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # user guesses
-    
+
     lives = 7
 
     # get user input
@@ -203,6 +203,7 @@ def game():
         return True
     print(Scores, get_name)
 
+
 def validate_name(user_name):
     """
     Inside the try, converts all string values into integers.
@@ -232,11 +233,12 @@ def get_valid_word():
         word = random.choice(words)
     return word.upper()
 
+
 def get_score_name():
     """
     Get name for high scores
     """
-    
+
     while True:
 
         print("Please enter name: \n")
@@ -249,10 +251,9 @@ def get_score_name():
 
     return user_name
 
+
 def update_high_score_sheet(get_names):
     """
-    In this function, create a list with the score and full name after validation,
-    then add it to the google sheets using "googlesheets.append_row(list)".
     First ensure full functionality of program:
     Level selection still isn´t working well. Once fixed, move onto google sheets.
     """
@@ -266,8 +267,9 @@ def update_high_score_sheet(get_names):
     print(screen_info)
 
     High_Scores.append_row(player_info_list)
-    
+
     return player_info_list
+
 
 def run_game():
     """
@@ -275,9 +277,7 @@ def run_game():
     """
     user_valid_words = get_valid_word()
     hangman_game = game()
-    #print(Scores.append)
-    
-
+    # print(Scores.append)
 
 
 if __name__ == "__main__":
