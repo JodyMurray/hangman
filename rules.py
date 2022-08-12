@@ -18,7 +18,8 @@ def rules_page():
         'guesses all of the letters',
         'before the hangman is complete, they win. ',
         '\n3: If they loose lives, the drawing of the HANGMAN is complete',
-        'and you lose.\n'
+        'and you lose.',
+        '\n4: Make it to the Highscores board if you win!\n'
     )
 
     print("-" * 80)

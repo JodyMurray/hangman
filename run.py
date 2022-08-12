@@ -118,8 +118,8 @@ def main():
                 print(Scores)
                 print("-" * 80)
                 print('\n')
-                input(" " * 24 + "Press Enter to return to the menu \n" + ' ' * 50)
-                SystemExit()
+                input(" " * 24 + "Press Enter to return to the main menu \n" + ' ' * 50)
+                main()
                 break
             elif user_input == 4:
                 sys.exit()
@@ -135,11 +135,10 @@ def game():
     statements showing if you guessed wrong or input an invalid letter
     """
     get_name = get_score_name()
-    worksheet_update = update_high_score_sheet(get_name)
+    
     word = get_valid_word()
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
-    Scores = re.sub(r"[\([{})\]]", "", Scores)
     used_letters = set()  # user guesses
 
     lives = 7
@@ -183,11 +182,15 @@ def game():
     # tells user whether they guessed the complete word or not
     if lives == 0:
         print('Sorry, you died. The correct word was', word)
+        print("\n")
+        input(" " * 24 + "Press Enter to return to the menu \n" + ' ' * 50)
+        main()
 
     else:
         print('\nYou guessed the word', word, '!! WINNER!')
+        worksheet_update = update_high_score_sheet(get_name)
+        print(Scores, get_name)
         return True
-    print(Scores, get_name)
 
 
 def validate_name(user_name):
@@ -243,10 +246,11 @@ def update_high_score_sheet(get_names):
     Get name and update to high scores
     """
 
-    player_info_list = [get_names]
+    player_info_list = [" ", get_names]
 
     screen_info = f"""
-    The Username you entered is {get_names}
+    Winner! \n
+    {get_names}
     """
 
     print(screen_info)

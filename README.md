@@ -82,3 +82,22 @@ A live version of this website will be found here: *Deployed website link*
 The design has been inspired by a tutorial demonstration I came across: PUT IN LINK
 The aim for this website is to create a user friendly terminal based application, that also retrieves and displays current and new data. The landing page provides a menu selection: Play Game, See Rules, See Highscores, or Exit application.
 
+**flow chart image*
+
+## Colour Scheme
+  Colour scheme comments.
+
+## Features
+
+- Application Features
+- Main Menu Landing Page
+- Word Page
+- Rules Page
+- High Scores
+- User Error
+
+# Application Features
+
+The application consists of features such as; Username input, 
+
+
