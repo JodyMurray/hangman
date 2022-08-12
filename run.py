@@ -4,6 +4,7 @@ import random
 import re
 import gspread
 from google.oauth2.service_account import Credentials
+from termcolor import colored
 from words import words
 from rules import rules_page
 
@@ -99,15 +100,15 @@ def main():
     Game structure with menu selection and validator.
     """
     while True:
-        print("Welcome to HANGMAN! \n")
-        print("1: Play GAME. \n")
-        print("2: See RULES. \n")
-        print("3: See HIGHSCORES. \n")
-        print("4: EXIT application. \n")
-        user_input = int(input("Please enter your choice: \n\n"))
+        print(colored("\nWelcome to HANGMAN! \n", 'green'))
+        print(colored("1: Play GAME. \n", 'yellow'))
+        print(colored("2: See RULES. \n", 'yellow'))
+        print(colored("3: See HIGHSCORES. \n", 'yellow'))
+        print(colored("4: EXIT application. \n", 'yellow'))
+        user_input = int(input(colored("Please enter your choice: \n\n", 'white')))
         try:
             if user_input == 1:
-                print("\n\nEntering Game!\n")
+                print(colored("\n\nEntering Game!\n", 'red'))
                 # Enter main gameplay
                 run_game()
                 sys.exit()
@@ -115,16 +116,17 @@ def main():
                 rules_page()
                 continue
             elif user_input == 3:
-                print(Scores)
+                print("\n")
+                print(colored(Scores, 'cyan'))
                 print("-" * 80)
                 print('\n')
-                input(" " * 24 + "Press Enter to return to the main menu \n" + ' ' * 50)
+                input(colored(" " * 24 + "Press Enter to return to the main menu \n" + ' ' * 50, 'white'))
                 main()
                 break
             elif user_input == 4:
                 sys.exit()
         except ValueError:
-            print("Invalid input. Please enter 1, 2, 3 or 4. \n")
+            print(colored("Invalid input. Please enter 1, 2, 3 or 4. \n", ))
             continue
         else:
             continue
@@ -146,14 +148,14 @@ def game():
     # get user input
     while len(word_letters) > 0 and lives > 0:
         # letters used
-        print('\nYou have', lives,
-              'lives left and you have used these letters: ', ' '.join(used_letters))
+        print(colored('\nYou have', 'magenta'), colored(lives, 'magenta'),
+              colored('lives left and you have used these letters: ', 'magenta'), colored(' '.join(used_letters)))
 
         word_list = [
             letter if letter in used_letters else '-' for letter in word]
         print('\nCurrent word: ', ' '.join(word_list))
 
-        user_letter = input('\nGuess a letter: ').upper()
+        user_letter = input(colored('\nGuess a letter: ', 'green')).upper()
         if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
@@ -163,7 +165,7 @@ def game():
             # tells user whether letter is correct or incorrect
             else:
                 lives = lives - 1
-                print('\nYour letter,', user_letter, 'is not in the word.')
+                print(colored('\nYour letter,', 'blue'), colored(user_letter, 'white'), colored('is not in the word.', 'blue'))
                 print(hang_images[lives])
             if user_letter in word:
                 used_letters.update(user_letter)
@@ -172,11 +174,11 @@ def game():
 
         # tells user if they have already guessed a letter
         elif user_letter in used_letters:
-            print('\nYou have already guessed that letter. Please try again.')
+            print(colored('\nYou have already guessed that letter. Please try again.', 'red'))
             print(hang_images[lives])
         # or if they input an incorrect character
         else:
-            print('\nInvalid character')
+            print(colored('\nInvalid character', 'red'))
             print(hang_images[lives])
 
     # tells user whether they guessed the complete word or not
