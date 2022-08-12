@@ -148,14 +148,14 @@ def game():
     # get user input
     while len(word_letters) > 0 and lives > 0:
         # letters used
-        print(colored('\nYou have', 'magenta'), colored(lives, 'magenta'),
+        print(colored('\n\nYou have', 'magenta'), colored(lives, 'magenta'),
               colored('lives left and you have used these letters: ', 'magenta'), colored(' '.join(used_letters)))
 
         word_list = [
             letter if letter in used_letters else '-' for letter in word]
-        print('\nCurrent word: ', ' '.join(word_list))
+        print(colored('\n\nCurrent word: ', 'white'), (' '.join(word_list)))
 
-        user_letter = input(colored('\nGuess a letter: ', 'green')).upper()
+        user_letter = input(colored('\n\nGuess a letter: ', 'cyan')).upper()
         if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
@@ -166,32 +166,32 @@ def game():
             else:
                 lives = lives - 1
                 print(colored('\nYour letter,', 'blue'), colored(user_letter, 'white'), colored('is not in the word.', 'blue'))
-                print(hang_images[lives])
+                print(colored(hang_images[lives], 'white'))
             if user_letter in word:
                 used_letters.update(user_letter)
-                print('\nGood guess,', user_letter, 'is in the word!')
-                print(hang_images[lives])
+                print(colored('\nGood guess,', 'green'), colored(user_letter, 'white'), colored('is in the word!', 'green'))
+                print(colored(hang_images[lives], 'white'))
 
         # tells user if they have already guessed a letter
         elif user_letter in used_letters:
             print(colored('\nYou have already guessed that letter. Please try again.', 'red'))
-            print(hang_images[lives])
+            print(colored(hang_images[lives], 'white'))
         # or if they input an incorrect character
         else:
             print(colored('\nInvalid character', 'red'))
-            print(hang_images[lives])
+            print(colored(hang_images[lives], 'white'))
 
     # tells user whether they guessed the complete word or not
     if lives == 0:
-        print('Sorry, you died. The correct word was', word)
+        print(colored('Sorry, you died. The correct word was', 'blue'), colored(word, 'white'))
         print("\n")
-        input(" " * 24 + "Press Enter to return to the menu \n" + ' ' * 50)
+        input(colored(" " * 24 + colored("Press Enter to return to the menu \n", 'green') + ' ' * 24))
         main()
 
     else:
-        print('\nYou guessed the word', word, '!! WINNER!')
+        print(colored('\nYou guessed the word', 'yellow'), colored(word, 'white'), colored('!! WINNER!', 'yellow'))
         worksheet_update = update_high_score_sheet(get_name)
-        print(Scores, get_name)
+        print(colored(Scores, 'magenta'), colored(get_name, 'magenta'))
         return True
 
 
@@ -207,10 +207,10 @@ def validate_name(user_name):
     res = regex_name.search(user_name)
 
     if res:
-        print(f"\nWelcome, {user_name}!")
+        print(colored(f"\nWelcome, {user_name}!", 'yellow'))
         return True
     else:
-        print("Invalid. Please enter a valid name.")
+        print(colored("\nInvalid. Please enter a valid name.\n", 'red'))
         return False
 
 
@@ -232,10 +232,10 @@ def get_score_name():
 
     while True:
 
-        print("Please enter name: \n")
-        print("Example: Yoda. \n")
+        print(colored("Please enter name: \n", 'white'))
+        print(colored("Example: Yoda. \n", 'cyan'))
 
-        user_name = input("Enter your name: \n\n")
+        user_name = input(colored("Enter your name: \n\n", 'white'))
 
         if validate_name(user_name):
             break
@@ -255,7 +255,7 @@ def update_high_score_sheet(get_names):
     {get_names}
     """
 
-    print(screen_info)
+    print(colored(screen_info, 'cyan'))
 
     High_Scores.append_row(player_info_list)
 
