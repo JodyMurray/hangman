@@ -246,7 +246,7 @@ def update_high_score_sheet(get_names):
     Get name and update to high scores
     """
 
-    player_info_list = [" ", get_names]
+    player_info_list = [get_names]
 
     screen_info = f"""
     Winner! \n

@@ -91,13 +91,60 @@ The aim for this website is to create a user friendly terminal based application
 
 - Application Features
 - Main Menu Landing Page
-- Word Page
-- Rules Page
+- Game
+- Rules
 - High Scores
 - User Error
 
 # Application Features
 
-The application consists of features such as; Username input, 
+- The application consists of features such as; Username input, a random choice from a long list of words, a scoreboard record of who has won the game.
+
+# Main Menu Loading Page
+
+- The user is firstly presented with a menu page, showing the options for the game.
+
+**screenshot*
+
+# Game
+
+- When you select 1: in the main menu, the game will start. First, the user will get a request for a name, which will be added to the Winner's board if they win at the end of the game. 
+
+**screenshot*
+
+- Each wrong answer and a part gets added to the figure.
+
+**screenshot*
+
+- Every correct letter is displayed, as are the letters the user has used and the letter placement in the word itself.
+
+**screenshot*
+
+- At the end of the game the user will see whether they've won or lost, either way the user can see the whole word displayed.
+
+# Rules
+
+- The rules option in the main menu will bring the user to the Rules list page.
+
+**screenshot*
+
+# High Scores
+
+- The HighScores option in the main menu will bring the user to the winner's board, a list of names of people who have won the game.
+
+**screenshot*
+
+# User Error 
+
+- The application is also able to catch user error and request appropriate data. The use of red text also helps to visually indicate to the user that an error has also occurred.
+
+**screenshot*
+
+# Technologies Used 
+
+* [Python](https://www.python.org/)
+* [HTML](https://html.com/) - Included in the Code Institute template
+* [CSS](https://en.wikipedia.org/wiki/CSS) - Included in the Code Institute template
+* [JavaScript](https://www.javascript.com/) - Included in the Code Institute template
 
 
