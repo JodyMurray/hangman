@@ -28,5 +28,6 @@ def rules_page():
 
     print(colored("-" * 80, 'white'))
     print('\n')
-    input(colored(" " * 24 + "Press Enter to return to the menu \n" + ' ' * 39, 'white'))
+    input(colored(" " * 24 + "Press Enter to return to the menu \
+        \n" + ' ' * 39, 'white'))
     SystemExit()
