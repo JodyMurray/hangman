@@ -54,7 +54,7 @@ A live version of this website will be found here: *Deployed website link*
 
 </details>
 
-<details><summary>Awknowledgements</summary>
+<details><summary>Acknowledgements</summary>
 
 - [Acknowledgements](#acknowledgements "Acknowledgements")
 
@@ -146,5 +146,69 @@ The aim for this website is to create a user friendly terminal based application
 * [HTML](https://html.com/) - Included in the Code Institute template
 * [CSS](https://en.wikipedia.org/wiki/CSS) - Included in the Code Institute template
 * [JavaScript](https://www.javascript.com/) - Included in the Code Institute template
+
+# Python libraries and API
+
+* [Re](https://docs.python.org/3/library/re.html)
+* [Sys](https://docs.python.org/3/library/sys.html)
+* [Termcolor](https://pypi.org/project/termcolor/)
+* [Gspread](https://docs.gspread.org/en/latest/)
+* [Google Auth](https://google-auth.readthedocs.io/en/master/)
+* [Random](https://docs.python.org/3/library/random.html)
+* [String](https://docs.python.org/3/library/string.html)
+
+# Storing data
+
+* [Google Sheets](https://www.google.com/sheets/about/)
+* [Google Drive](https://www.google.com/drive/)
+
+# Testing
+
+Testing and checking application functionality has been carried out continuously over the development of the project.
+
+# Validator Testing
+
+Code has been tested and corrected via the PEP8 Online Validator http://pep8online.com/.
+
+# Fixed bugs
+
+---
+
+# Deployment
+
+The development environment used for this project was Gitpod. Regular commits and pushes to Github have been employed to be able to track and trace the development process of the website. The Gitpod environment for this particular project was created using a template provided by Code Institute.
+
+The live version of this project is deployed using [Heroku](https://heroku.com).
+
+The following is the procedure for how this project was deployed via Heroku:
+
+A requirements.txt needs to be created in the same folder as the .py file in Gitpod. This needs to have a list of necessary libraries the project needs to run as a Heroku.
+
+* Log in to Heroku (or create an account if otherwise)
+* Click on New in the Heroku dashboard and select ”Create new app”
+* Give the application an original name, choose your region and click “Create App”
+* In the settings tab for the new application two Config Vars are necessary:
+    * One is named CREDS and contains the credentials key for Google Drive API
+    * One is name PORT and has the value of 8000
+* Two buildpack scripts were added: Python and Nodejs (in that order)
+* Go to "Deploy" section, and click the Github icon in 'Deployment Method' and connect
+* In this case, this project was set to 'Automatic Deploys'.
+* Deployment should then be completed within a brief time span and link readily available. 
+
+After those steps were taken the application was deployed at the following link: **
+
+# Acknowledgements
+
+-----
+
+# Sources
+
+Various websites have been consulted during the development of this project. All code has been credited in code comments within the project.
+
+The following have proved incredibly helpful:
+
+- https://stackoverflow.com/
+- https://www.youtube.com/
+- Slack
 
 
