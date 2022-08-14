@@ -162,7 +162,7 @@ def game():
             letter if letter in used_letters else '-' for letter in word]
         print(colored('\n\nCurrent word: ', 'white'), (' '.join(word_list)))
 
-        user_letter = input(colored('\n\nGuess a letter: ', 'cyan')).upper()
+        user_letter = input(colored('\n\nGuess a letter: \n', 'cyan')).upper()
         if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
