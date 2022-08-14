@@ -121,7 +121,7 @@ def main():
                 print("\n")
                 print(colored(Scores, 'cyan'))
                 print("\n")
-                print("-" * 100)
+                print("-" * 80)
                 print('\n')
                 input(colored(
                     " " * 24 + "Press Enter to return to the main menu \

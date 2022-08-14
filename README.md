@@ -112,7 +112,11 @@ The aim for this website is to create a user friendly terminal based application
 
 - When you select 1: in the main menu, the game will start. First, the user will get a request for a name, which will be added to the Winner's board if they win at the end of the game. 
 
-**screenshot*
+![screenshot](images/name.png)
+
+- Current word selected and displayed as "-------".
+
+![screenshot](images/word.png)
 
 - Each wrong answer and a part gets added to the figure.
 
@@ -124,23 +128,28 @@ The aim for this website is to create a user friendly terminal based application
 
 - At the end of the game the user will see whether they've won or lost, either way the user can see the whole word displayed.
 
+![screenshot](images/winner.png)
+![screenshot](images/loser.png)
+
+
 # Rules
 
-- The rules option in the main menu will bring the user to the Rules list page.
+### The rules option in the main menu will bring the user to the Rules list page.
 
-**screenshot*
+![screenshot](images/rules.png)
 
 # High Scores
 
-- The HighScores option in the main menu will bring the user to the winner's board, a list of names of people who have won the game.
+### The HighScores option in the main menu will bring the user to the winner's board, a list of names of people who have won the game.
 
-**screenshot*
+
 
 # User Error 
 
-- The application is also able to catch user error and request appropriate data. The use of red text also helps to visually indicate to the user that an error has also occurred.
+### The application is also able to catch user error and request appropriate data. The use of red text also helps to visually indicate to the user that an error has also occurred.
 
 ![screenshot](images/error.png)
+![screenshot](images/error2.png)
 
 # Technologies Used 
 
