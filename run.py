@@ -120,7 +120,8 @@ def main():
             elif user_input == 3:
                 print("\n")
                 print(colored(Scores, 'cyan'))
-                print("-" * 80)
+                print("\n")
+                print("-" * 100)
                 print('\n')
                 input(colored(
                     " " * 24 + "Press Enter to return to the main menu \
@@ -211,7 +212,12 @@ def game():
             colored('\nYou guessed the word', 'yellow'), colored(
                 word, 'white'), colored('!! WINNER!', 'yellow'))
         worksheet_update = update_high_score_sheet(get_name)
-        print(colored(Scores, 'magenta'), colored(get_name, 'magenta'))
+        print(colored(Scores, 'magenta'))
+        print("\n")
+        print(colored(" " * 50 + get_name, 'magenta'))
+        print("\n")
+        print("-" * 130)
+        print("\n")
         return True
 
 
@@ -280,7 +286,6 @@ def update_high_score_sheet(get_names):
     High_Scores.append_row(player_info_list)
 
     return player_info_list
-
 
 def run_game():
     """
