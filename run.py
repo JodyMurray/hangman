@@ -162,7 +162,7 @@ def game():
             letter if letter in used_letters else '-' for letter in word]
         print(colored('\n\nCurrent word: ', 'white'), (' '.join(word_list)))
 
-        user_letter = input(colored('\n\nGuess a letter: \n', 'cyan')).upper()
+        user_letter = input(colored('\n\nGuess a letter: ', 'cyan')).upper()
         if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
@@ -173,13 +173,15 @@ def game():
             else:
                 lives = lives - 1
                 print(colored(
-                    '\nYour letter,', 'blue'), colored(user_letter, 'white'), colored(
+                    '\nYour letter,', 'blue'), colored(
+                        user_letter, 'white'), colored(
                         'is not in the word.', 'blue'))
                 print(colored(hang_images[lives], 'white'))
             if user_letter in word:
                 used_letters.update(user_letter)
-                print(colored(
-                    '\nGood guess,', 'green'), colored(user_letter, 'white'), colored(
+                print(
+                    colored('\nGood guess,', 'green'), colored(
+                        user_letter, 'white'), colored(
                         'is in the word!', 'green'))
                 print(colored(hang_images[lives], 'white'))
 
