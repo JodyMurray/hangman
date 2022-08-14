@@ -1,6 +1,6 @@
 **Hangman**
 
-*Responsive design shot goes here*
+![screenshot](images/responsive.png)
 
 This game is based from the original Hangman game we all grew up with. A random word is selected and you're given the number of letters it contains. Guessing a new letter each go, if you choose correct, the terminal will tell you and show you where it belongs in the randonly chosen word, if you guess wrong, a line will be added to the "hangman" until it is complete.
 
@@ -79,14 +79,17 @@ A live version of this website will be found here: https://hangman-game00.heroku
  * To pass the time.
 
  ## Design 
-The design has been inspired by a tutorial demonstration I came across: PUT IN LINK
+The design has been inspired by a tutorial demonstration I came across: https://www.youtube.com/watch?v=8ext9G7xspg&t=2111s
+
 The aim for this website is to create a user friendly terminal based application, that also retrieves and displays current and new data. The landing page provides a menu selection: Play Game, See Rules, See Highscores, or Exit application.
 
 ![screenshot](images/flowchart.png)
 
 
 ## Colour Scheme
-  Colour scheme comments.
+- The colours I imported using termcolor. 
+- It allows basic colours to be used in the terminal.
+- I used colours in a nice order throughout the game that is appealing to the eyes.
 
 ## Features
 
@@ -131,7 +134,6 @@ The aim for this website is to create a user friendly terminal based application
 ![screenshot](images/winner.png)
 ![screenshot](images/loser.png)
 
-
 # Rules
 
 ### The rules option in the main menu will bring the user to the Rules list page.
@@ -142,7 +144,7 @@ The aim for this website is to create a user friendly terminal based application
 
 ### The HighScores option in the main menu will bring the user to the winner's board, a list of names of people who have won the game.
 
-
+![screenshot](images/highscores.png)
 
 # User Error 
 
@@ -150,6 +152,7 @@ The aim for this website is to create a user friendly terminal based application
 
 ![screenshot](images/error.png)
 ![screenshot](images/error2.png)
+![screenshot](images/vname.png)
 
 # Technologies Used 
 
@@ -183,7 +186,31 @@ Code has been tested and corrected via the PEP8 Online Validator http://pep8onli
 
 # Fixed bugs
 
----
+### - Colouring text was an issue with many arguments in a perameter.
+- Research from stackoverflow helped.
+
+### - Attempts to create a function to select level for game didn't work for me.
+- Left this out as it was taking me too long.
+
+### - Getting high score list was showing up for both winners and losers.
+- Moved line of code to just have high scores showing and adding your name if you win.
+
+### - Import code was coming up as an issue.
+- Reorganising structure resolved this issue.
+
+### - Name request was coming up twice, at the beginning of the game and the end.
+- Moving the code to the correct function resolved this issue.
+
+### - Square brackets in the HighScores section.
+- Left this issue.
+
+### - Lines were over the 79 character limit.
+- Went through all the corresponding lines of code and ammended them.
+
+
+### Lots of trailing white spaces were detected.
+- Went through the corresponding lines of code and rectified the white spacing.
+
 
 # Deployment
 
@@ -210,7 +237,16 @@ After those steps were taken the application was deployed at the following link:
 
 # Acknowledgements
 
------
+For inspiration, for code, design help and advice, I'd like to thank;
+
+### Martina Terlevic
+- My wonderful mentor at Code Institute.
+
+### The Code Institute
+- For support and education.
+
+### Keiron Chaudhry
+- Fellow student and colleague.
 
 # Sources
 
@@ -219,7 +255,7 @@ Various websites have been consulted during the development of this project. All
 The following have proved incredibly helpful:
 
 - https://stackoverflow.com/
-- https://www.youtube.com/
+- https://www.youtube.com/ - coding course channel
 - Slack
 
 
