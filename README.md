@@ -8,7 +8,7 @@ The words used are on a separate page and are chosen randomly from many, many wo
 
 This project is the third of five projects that needs to be completed in order to receve a diploma in Software Development from The Code Institute.
 
-A live version of this website will be found here: *Deployed website link*
+A live version of this website will be found here: https://hangman-game00.herokuapp.com/
 
 
 ## Table of Contents ##
@@ -82,7 +82,8 @@ A live version of this website will be found here: *Deployed website link*
 The design has been inspired by a tutorial demonstration I came across: PUT IN LINK
 The aim for this website is to create a user friendly terminal based application, that also retrieves and displays current and new data. The landing page provides a menu selection: Play Game, See Rules, See Highscores, or Exit application.
 
-**flow chart image*
+![screenshot](images/flowchart.png)
+
 
 ## Colour Scheme
   Colour scheme comments.
@@ -104,7 +105,8 @@ The aim for this website is to create a user friendly terminal based application
 
 - The user is firstly presented with a menu page, showing the options for the game.
 
-**screenshot*
+![screenshot](images/menu.png)
+
 
 # Game
 
@@ -114,11 +116,11 @@ The aim for this website is to create a user friendly terminal based application
 
 - Each wrong answer and a part gets added to the figure.
 
-**screenshot*
+![screenshot](images/wrong.png)
 
 - Every correct letter is displayed, as are the letters the user has used and the letter placement in the word itself.
 
-**screenshot*
+![screenshot](images/correct.png)
 
 - At the end of the game the user will see whether they've won or lost, either way the user can see the whole word displayed.
 
@@ -138,7 +140,7 @@ The aim for this website is to create a user friendly terminal based application
 
 - The application is also able to catch user error and request appropriate data. The use of red text also helps to visually indicate to the user that an error has also occurred.
 
-**screenshot*
+![screenshot](images/error.png)
 
 # Technologies Used 
 

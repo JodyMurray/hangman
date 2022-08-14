@@ -219,7 +219,7 @@ def game():
         print("\n")
         print(colored(" " * 50 + get_name, 'magenta'))
         print("\n")
-        print("-" * 130)
+        print("-" * 90)
         print("\n")
         return True
 
