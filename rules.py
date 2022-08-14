@@ -1,16 +1,13 @@
 from termcolor import colored
 
 
-"""
-Rules variable defined in list
-"""
-
-
 def rules_page():
+
     """
     Rules definition, making clear the rules of the game
     And press enter to go back to main menu.
     """
+
     print("-" * 80)
     print('\n')
     print(colored(" " * 30 + "Rules of the GAME", 'yellow'))

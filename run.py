@@ -22,11 +22,14 @@ SHEET = GSPREAD_CLIENT.open('high-scores2')
 High_Scores = SHEET.worksheet('scores')
 Scores = High_Scores.get_all_values()
 
+
 def update_worksheet(High_Scores, worksheet):
+
     """
     Receives a list of integers to be insterted into a worksheet
     Update the relevant worksheet with the data provided.
     """
+
     print(f"Updating {worksheet} scores worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(High_Scores)
@@ -119,13 +122,13 @@ def main():
                 continue
             elif user_input == 3:
                 print("\n")
-                print(colored(Scores, 'cyan'))
+                print(colored(Scores[1:15], 'cyan'))
                 print("\n")
-                print("-" * 70)
+                print(" " * 5 + "-" * 100)
                 print('\n')
                 input(colored(
                     " " * 24 + "Press Enter to return to the main menu \
-                        \n" + ' ' * 50, 'white'))
+                        \n" + ' ' * 45, 'white'))
                 main()
                 break
             elif user_input == 4:
@@ -139,13 +142,16 @@ def main():
         else:
             continue
 
+
 def game():
+
     """
     Starts the game, collects user letter and shows this along with print
     statements showing if you guessed wrong or input an invalid letter
     """
+
     get_name = get_score_name()
-    
+
     word = get_valid_word()
     word_letters = set(word)
     alphabet = set(string.ascii_uppercase)
@@ -207,7 +213,7 @@ def game():
                 word, 'white'))
         print("\n")
         input(colored(" " * 24 + colored(
-            "Press Enter to return to the menu \n", 'green') + ' ' * 24))
+            "Press Enter to return to the menu \n", 'green') + ' ' * 40))
         main()
 
     else:
@@ -219,8 +225,13 @@ def game():
         print("\n")
         print(colored(" " * 50 + get_name, 'magenta'))
         print("\n")
-        print("-" * 90)
+        print(colored("-" * 100, 'white'))
         print("\n")
+        input(colored(
+            " " * 30 + colored(
+                "Press enter to return to main menu: \n", 'green') + colored(
+                    ' ' * 40)))
+        main()
         return True
 
 
@@ -290,10 +301,13 @@ def update_high_score_sheet(get_names):
 
     return player_info_list
 
+
 def run_game():
+
     """
     Order of game functions
     """
+
     user_valid_words = get_valid_word()
     hangman_game = game()
 
