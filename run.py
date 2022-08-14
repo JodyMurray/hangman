@@ -129,6 +129,9 @@ def main():
                 main()
                 break
             elif user_input == 4:
+                print("\n")
+                print(colored("Leaving application...", 'blue'))
+                print("\n")
                 sys.exit()
         except ValueError:
             print(colored("Invalid input. Please enter 1, 2, 3 or 4. \n", ))
