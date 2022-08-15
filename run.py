@@ -26,7 +26,7 @@ Scores = High_Scores.get_all_values()
 def update_worksheet(High_Scores, worksheet):
 
     """
-    Receives a list of integers to be insterted into a worksheet
+    Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided.
     """
 
@@ -100,7 +100,7 @@ hang_images = {
 
 def main():
     """
-    Game structure with menu selection and validator.
+    Game structure with menu selection and validator for user input
     """
     while True:
         print(colored("\nWelcome to HANGMAN! \n", 'green'))
@@ -237,9 +237,7 @@ def game():
 
 def validate_name(user_name):
     """
-    Inside the try, converts all string values into integers.
-    Raises ValueError if strings cannot be converted into int,
-    or if there aren't exactly 6 values.
+    Validates user input for name and checks whether it is correct or incorrect
     """
 
     regex_name = re.compile(r'^([a-z]+)( [a-z]+)*( [a-z]+)*$', re.IGNORECASE)
@@ -267,7 +265,7 @@ def get_valid_word():
 
 def get_score_name():
     """
-    Get name for high scores entries
+    Requests a name from the user which is entered into high scores
     """
 
     while True:
@@ -285,7 +283,7 @@ def get_score_name():
 
 def update_high_score_sheet(get_names):
     """
-    Get name and update to high scores
+    Updates google sheets with requested user name
     """
 
     player_info_list = [get_names]
