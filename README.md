@@ -1,10 +1,10 @@
-**Hangman**
+# Hangman Game
 
 ![screenshot](images/responsive.png)
 
-This game is based from the original Hangman game we all grew up with. A random word is selected and you're given the number of letters it contains. Guessing a new letter each go, if you choose correct, the terminal will tell you and show you where it belongs in the randonly chosen word, if you guess wrong, a line will be added to the "hangman" until it is complete.
+This game is based on the original Hangman game we all grew up with. A random word is selected and you're given the number of letters it contains. Guessing a new letter each go, if you choose correct, the terminal will tell you and show you where it belongs in the randomly chosen word, if you guess wrong, a line will be added to the "hangman" until it is complete.
 
-The words used are on a separate page and are chosen randomly from many, many words. The game only gives you 7 lives, which is the amount of wrong answers to complete the "hangman" image. 
+The words used are on a separate page and are chosen randomly from many words. The game only gives you 7 lives, which is the amount of wrong answers to complete the "hangman" image. 
 
 This project is the third of five projects that needs to be completed in order to receve a diploma in Software Development from The Code Institute.
 
@@ -44,7 +44,9 @@ A live version of this website will be found here: https://hangman-game00.heroku
 
   - [Validator testing](#validator-testing "Validator Testing")
   - [Testing and bugs](#testing-and-bugs "Testing and bugs")
-
+  - [Fixed Bugs](#fixed-bugs "Fixed Bugs") 
+  - [Unfixed Bugs](#unfixed-bugs "Unfixed Bugs")
+  - [Future plans to implement](#future-plans-to-implement "Future plans to implement")
 
 </details>
 
@@ -71,7 +73,7 @@ A live version of this website will be found here: https://hangman-game00.heroku
 ## UX 
 
 ## User Demographic
- This application has been designed for users of all ages just for some fun, to test their knowledge and see if they are any good at the class game, Hangman!
+ This application has been designed for users of all ages just for some fun, to test their knowledge and see if they are any good at the classic game, Hangman!
  
  ## User Goals
  * To have some fun and play Hangman!
@@ -179,21 +181,18 @@ The aim for this website is to create a user friendly terminal based application
 * [Google Sheets](https://www.google.com/sheets/about/)
 * [Google Drive](https://www.google.com/drive/)
 
-# Testing
-
-Testing and checking application functionality has been carried out continuously over the development of the project.
-
 # Validator Testing
 
 Code has been tested and corrected via the PEP8 Online Validator http://pep8online.com/.
+
+# Testing and bugs
+
+Testing and checking application functionality has been carried out continuously over the development of the project.
 
 # Fixed bugs
 
 ### - Colouring text was an issue with many arguments in a perameter.
 - Research from stackoverflow helped.
-
-### - Attempts to create a function to select level for game didn't work for me.
-- Left this out as it was taking me too long.
 
 ### - Getting high score list was showing up for both winners and losers.
 - Moved line of code to just have high scores showing and adding your name if you win.
@@ -204,9 +203,6 @@ Code has been tested and corrected via the PEP8 Online Validator http://pep8onli
 ### - Name request was coming up twice, at the beginning of the game and the end.
 - Moving the code to the correct function resolved this issue.
 
-### - Square brackets in the HighScores section.
-- Left this issue.
-
 ### - Lines were over the 79 character limit.
 - Went through all the corresponding lines of code and ammended them.
 
@@ -214,6 +210,13 @@ Code has been tested and corrected via the PEP8 Online Validator http://pep8onli
 ### Lots of trailing white spaces were detected.
 - Went through the corresponding lines of code and rectified the white spacing.
 
+# Unfixed Bugs
+### Google sheets brackets.
+- This solution I could not locate, not a bug or issue, just for aesthetics. Every solution I found didn't resolve it for google sheets.
+
+# Future plans to implement
+### Level selection.
+- For future plans for this project, I would like to include a level selection section, choosing from easy, medium and hard level words.
 
 # Deployment
 
