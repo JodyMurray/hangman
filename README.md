@@ -124,6 +124,7 @@ The aim for this website is to create a user friendly terminal based application
 - Each wrong answer and a part gets added to the figure.
 
 ![screenshot](images/wrong.png)
+![screenshot](images/wrong2.png)
 
 - Every correct letter is displayed, as are the letters the user has used and the letter placement in the word itself.
 
@@ -170,6 +171,8 @@ The aim for this website is to create a user friendly terminal based application
 * [Google Auth](https://google-auth.readthedocs.io/en/master/)
 * [Random](https://docs.python.org/3/library/random.html)
 * [String](https://docs.python.org/3/library/string.html)
+* Seperate page set up for words (words.py) for cleaner and easier to read code.
+* Seperate page for the rules string and function (rules.py) for cleaner and easier to read code.
 
 # Storing data
 
