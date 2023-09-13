@@ -23,20 +23,20 @@ A live version of this website will be found here: https://hangman-game00.heroku
 
 <details><summary>Features</summary>
 
-- [Application Features](#application_features "Application Features")
-- [Main Menu Landing Page](#main_menu_landing_page "Main Menu Landing Page")
-- [Word Page](#word_page "Word Page")
-- [Rules Page](#rules_page "Rules Page")
-- [High Scores](#high_scores "High Scores")
-- [User Error](#user_error "User Error")
+- [Application Features](#application-features "Application Features")
+- [Main Menu Landing Page](#main-menu-landing-page "Main Menu Landing Page")
+- [Word Page](#word-page "Word Page")
+- [Rules Page](#rules-page "Rules Page")
+- [High Scores](#high-scores "High Scores")
+- [User Error](#user-error "User Error")
 
 </details>
 
 <details><summary>Technologies Used</summary>
 
-- [Languages Used](#languages_used "Languages Used")
-- [Python Libraries and API](#python_libraries_and_api "Python Libraries and API")
-- [Storing Data](#storing_data "Storing Data")
+- [Languages Used](#languages-used "Languages Used")
+- [Python Libraries and API](#python-libraries-and-api "Python Libraries and API")
+- [Storing Data](#storing-data "Storing Data")
 
 </details>
 
@@ -106,7 +106,7 @@ The aim for this website is to create a user friendly terminal based application
 
 - The application consists of features such as; Username input, a random choice from a long list of words, a scoreboard record of who has won the game.
 
-# Main Menu Loading Page
+# Main Menu Landing Page
 
 - The user is firstly presented with a menu page, showing the options for the game.
 
@@ -158,6 +158,8 @@ The aim for this website is to create a user friendly terminal based application
 ![screenshot](images/vname.png)
 
 # Technologies Used 
+
+## Languages Used
 
 * [Python](https://www.python.org/)
 * [HTML](https://html.com/) - Included in the Code Institute template
